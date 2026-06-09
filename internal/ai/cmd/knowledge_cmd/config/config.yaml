@@ -1,0 +1,40 @@
+# https://goframe.org/docs/web/server-config-file-template
+server:
+  address: ":8000"
+  openapiPath: "/api.json"
+  swaggerPath: "/swagger"
+
+# https://goframe.org/docs/core/glog-config
+logger:
+  level: "all"
+  stdout: true
+
+think_chat_model:
+  description: "reasoning chat model for complex diagnosis"
+  api_key: "YOUR_CHAT_API_KEY"
+  base_url: "YOUR_CHAT_API_BASE_URL"
+  model: "REASONING_CHAT_MODEL"
+
+quick_chat_model:
+  description: "fast chat model for low-latency responses"
+  api_key: "YOUR_CHAT_API_KEY"
+  base_url: "YOUR_CHAT_API_BASE_URL"
+  model: "FAST_CHAT_MODEL"
+
+# 豆包embedding下架，下面的api key和base url换成阿里云的
+embedding_model:
+  description: "multimodal embedding model for knowledge retrieval"
+  api_key: "YOUR_EMBEDDING_API_KEY"
+  base_url: "YOUR_EMBEDDING_API_BASE_URL"
+  model: "MULTIMODAL_EMBEDDING_MODEL"
+  endpoint: "YOUR_MULTIMODAL_EMBEDDING_ENDPOINT"
+  dimension: 1152
+
+milvus:
+  address: "YOUR_MILVUS_ADDRESS"
+  collection: "YOUR_MILVUS_COLLECTION"
+  vector_dim: 36864
+
+file_dir: "YOUR_KNOWLEDGE_DOCS_DIR"
+
+mcp_url: "https://mcp-api.tencent-cloud.com/sse/XXXX"

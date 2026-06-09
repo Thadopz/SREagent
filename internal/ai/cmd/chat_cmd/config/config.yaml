@@ -1,0 +1,107 @@
+# https://goframe.org/docs/web/server-config-file-template
+server:
+  address: ":8000"
+  openapiPath: "/api.json"
+  swaggerPath: "/swagger"
+
+# https://goframe.org/docs/core/glog-config
+logger:
+  level: "all"
+  stdout: true
+
+database:
+  default:
+    type: "mysql"
+    host: "YOUR_DB_HOST"
+    port: "YOUR_DB_PORT"
+    user: "YOUR_DB_USER"
+    pass: "YOUR_DB_PASSWORD"
+    name: "YOUR_DB_NAME"
+
+think_chat_model:
+  description: "reasoning chat model for complex diagnosis"
+  api_key: "YOUR_CHAT_API_KEY"
+  base_url: "YOUR_CHAT_API_BASE_URL"
+  model: "REASONING_CHAT_MODEL"
+
+quick_chat_model:
+  description: "fast chat model for low-latency responses"
+  api_key: "YOUR_CHAT_API_KEY"
+  base_url: "YOUR_CHAT_API_BASE_URL"
+  model: "FAST_CHAT_MODEL"
+
+embedding_model:
+  description: "multimodal embedding model for knowledge retrieval"
+  api_key: "YOUR_EMBEDDING_API_KEY"
+  base_url: "YOUR_EMBEDDING_API_BASE_URL"
+  model: "MULTIMODAL_EMBEDDING_MODEL"
+  endpoint: "YOUR_MULTIMODAL_EMBEDDING_ENDPOINT"
+  dimension: 1152
+
+rerank:
+  top_n: 3
+  observe_log: true
+
+milvus:
+  address: "YOUR_MILVUS_ADDRESS"
+  collection: "YOUR_MILVUS_COLLECTION"
+  vector_dim: 36864
+
+knowledge_retrieval:
+  auto_keywords:
+    - nacos
+    - rocketmq
+    - "\u8ba2\u5355\u8d85\u65f6"
+    - "\u652f\u4ed8\u56de\u8c03\u5931\u8d25"
+  force_phrases:
+    - "\u67e5\u77e5\u8bc6\u5e93"
+    - "\u6309\u624b\u518c"
+  suppress_phrases:
+    - "\u4e0d\u67e5\u77e5\u8bc6\u5e93"
+    - "\u53ea\u6839\u636e\u5f53\u524d\u5bf9\u8bdd"
+
+skills:
+  enabled: true
+  dirs:
+    - "skills"
+  max_selected: 2
+  max_body_chars: 6000
+
+tools:
+  mysql:
+    max_rows: 100
+    allow_write: false
+  mcp_log:
+    enabled: true
+    required: false
+    url: "https://mcp-api.tencent-cloud.com/sse/YOUR_MCP_INSTANCE_ID"
+
+permissions:
+  enabled: true
+  default_role: "viewer"
+  roles:
+    viewer:
+      scopes:
+        - "tool:docs.read"
+        - "tool:time.read"
+    oncall:
+      scopes:
+        - "tool:docs.read"
+        - "tool:time.read"
+        - "tool:metrics.read"
+        - "tool:logs.read"
+        - "tool:mysql.read"
+        - "tool:payment.read"
+    admin:
+      scopes:
+        - "tool:docs.read"
+        - "tool:time.read"
+        - "tool:metrics.read"
+        - "tool:logs.read"
+        - "tool:mysql.read"
+        - "tool:mysql.write"
+        - "tool:payment.read"
+
+file_dir: "YOUR_KNOWLEDGE_DOCS_DIR"
+
+mcp_url: "https://mcp-api.tencent-cloud.com/sse/YOUR_MCP_INSTANCE_ID"

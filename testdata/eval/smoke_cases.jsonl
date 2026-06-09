@@ -1,0 +1,3 @@
+{"id":"smoke-chat","category":"chat","query":"hello","expected":{"use_knowledge":false,"answer_contains":[""]}}
+{"id":"smoke-knowledge","category":"knowledge","query":"how to handle alert by runbook","expected":{"use_knowledge":true}}
+{"id":"smoke-time","category":"tool","query":"what time is it now","expected":{"tools":["get_current_time"]}}

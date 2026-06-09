@@ -1,0 +1,13 @@
+
+# CLI tool, only in development environment.
+# https://goframe.org/docs/cli
+gfcli:
+  gen:
+    dao:
+      - link: "mysql:YOUR_DB_USER:YOUR_DB_PASSWORD@tcp(YOUR_DB_HOST:3306)/YOUR_DB_NAME"
+        descriptionTag: true
+
+  docker:
+    build: "-a amd64 -s linux -p temp -ew"
+    tagPrefixes:
+      - my.image.pub/my-app
