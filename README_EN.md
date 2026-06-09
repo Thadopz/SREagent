@@ -39,7 +39,7 @@ Frontend assets and `docs/` content have been removed from the repository and ar
 - MySQL 8.x or compatible
 - Milvus
 - An OpenAI-compatible chat model provider
-- DashScope multimodal embedding service
+- A multimodal embedding service
 - Optional: log MCP SSE service
 
 ## Configuration
@@ -51,9 +51,9 @@ database:
   default:
     host: "127.0.0.1"
     port: "3306"
-    user: "root"
-    pass: "123456"
-    name: "superbiz_agent"
+    user: "YOUR_DATABASE_USER"
+    pass: "YOUR_DATABASE_PASSWORD"
+    name: "YOUR_DATABASE_NAME"
 
 think_chat_model:
   api_key: "YOUR_CHAT_API_KEY"
@@ -71,13 +71,6 @@ tools:
   mysql:
     allow_write: false
 ```
-
-Notes:
-
-- Do not commit real API keys, MCP URLs, or database passwords.
-- Keep `tools.mysql.allow_write` set to `false` by default. Write operations are high-risk.
-- When `tools.mcp_log.required` is `false`, the service can continue without log MCP tools.
-- `permissions.default_role` is `viewer` by default. Higher privileges should be granted explicitly.
 
 ## Database Setup
 
@@ -149,19 +142,3 @@ go run ./internal/ai/cmd/eval_cmd -mode smoke -cases testdata/eval/smoke_cases.j
 
 Reports are written to `reports/` by default. This directory is ignored by Git.
 
-## Tests
-
-```bash
-go test ./...
-```
-
-## Safety Boundaries
-
-- Do not fabricate logs, metrics, database results, order states, or internal procedures.
-- A failed tool call is an evidence gap, not proof that the system is healthy.
-- Refunds, retries, order closure, database writes, deletes, updates, restarts, and capacity changes require explicit approval.
-- When evidence is missing, state what is unknown and which source should be checked next.
-
-## Publishing Status
-
-The repository name and Go module name are both `SREagent`.
