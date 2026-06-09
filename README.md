@@ -39,7 +39,7 @@ utility/                      客户端、记忆、通用工具和中间件
 - MySQL 8.x 或兼容版本
 - Milvus
 - 可兼容 OpenAI API 的大模型服务
-- DashScope 多模态 embedding 服务
+- 多模态 embedding 服务
 - 可选：日志 MCP SSE 服务
 
 ## 配置
@@ -51,9 +51,9 @@ database:
   default:
     host: "127.0.0.1"
     port: "3306"
-    user: "root"
-    pass: "123456"
-    name: "superbiz_agent"
+    user: "YOUR_DATABASE_USER"
+    pass: "YOUR_DATABASE_PASSWORD"
+    name: "YOUR_DATABASE_NAME"
 
 think_chat_model:
   api_key: "YOUR_CHAT_API_KEY"
@@ -71,13 +71,6 @@ tools:
   mysql:
     allow_write: false
 ```
-
-注意事项：
-
-- 不要提交真实 API Key、MCP URL 或数据库密码。
-- `tools.mysql.allow_write` 默认应保持 `false`，写操作属于高风险动作。
-- `tools.mcp_log.required` 为 `false` 时，日志 MCP 不可用不会阻止服务启动。
-- `permissions.default_role` 默认是 `viewer`，更高权限应通过明确角色控制。
 
 ## 初始化数据库
 
@@ -149,19 +142,3 @@ go run ./internal/ai/cmd/eval_cmd -mode smoke -cases testdata/eval/smoke_cases.j
 
 评估输出默认写入 `reports/`，该目录被 Git 忽略。
 
-## 测试
-
-```bash
-go test ./...
-```
-
-## 安全边界
-
-- 不编造日志、指标、数据库结果、订单状态或内部流程。
-- 工具失败代表证据缺口，不代表系统正常。
-- 退款、重试、关单、数据库写入、删除、更新、重启、扩缩容等高风险动作必须走显式审批。
-- 缺少证据时，应说明未知项和下一步需要检查的来源。
-
-## 发布状态
-
-当前仓库名和 Go module 名均为 `SREagent`。
